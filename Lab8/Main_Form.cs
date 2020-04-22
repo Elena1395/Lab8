@@ -24,7 +24,7 @@ namespace Lab8
 
         private void showAllToolStripMenuItem_Click(object sender, EventArgs e)
         { 
-            if (Common.TryToLoadXML())
+            if (Common.TryToLoadXML(Common.fileName))
             {
                 XDocument doc = XDocument.Load(Common.fileName);
                 IEnumerable<XElement> xElem = doc.Root.Elements();
@@ -45,6 +45,7 @@ namespace Lab8
                     foreach (XElement element in el.Elements())
                         textBox1.Text += "      " + element.Name + ": " + element.Value + Environment.NewLine;
                 }
+                Common.BoolForUnitTest = true;
             }
             catch (Exception e) {
                 MessageBox.Show("Ошибка при чтении файла xml: \r\n"+e.Message);

@@ -20,7 +20,7 @@ namespace Lab8
 
         private void AddFiler_button_Click(object sender, EventArgs e)
         {
-            if (Common.TryToLoadXML())
+            if (Common.TryToLoadXML(Common.fileName))
             {
                 XDocument doc = XDocument.Load(Common.fileName);
                 string data = textBox_Filter.Text;
@@ -80,6 +80,7 @@ namespace Lab8
                 else
                 {
                     fm.ShowXelements(res);
+                    Common.BoolForUnitTest = true;
                 }
             }
             catch (Exception e)
@@ -153,41 +154,6 @@ namespace Lab8
                 MessageBox.Show("Ошибка при чтении файла xml: \r\n" + e.Message);
             }
 
-        }
-        //public bool CheckAddFilter_Form() {
-        //    string data = textBox_Filter.Text;
-        //    switch (filter)
-        //    {
-        //        case 1:
-        //            {
-        //                if (!Program.CheckFlightNumber(data)) {
-        //                    return false;
-        //                }
-        //                break;
-        //            }
-        //        case 2:
-        //            {
-        //                if (!Program.CheckDestination(data)) {
-        //                    return false;
-        //                }
-        //                break;
-        //            }
-        //        case 3:
-        //            {
-        //                if (!Program.CheckDate(data)) {
-        //                    return false;
-        //                }
-        //                break;
-        //            }
-        //        case 4:
-        //            {
-        //                if (!Program.CheckTotalWeight(data)) {
-        //                    return false;
-        //                }
-        //                break;
-        //            }
-        //    }
-        //    return true;
-        //}
+        }        
     }
 }

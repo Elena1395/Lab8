@@ -15,25 +15,32 @@ namespace Lab8
 
         private void AddData_Click(object sender, EventArgs e)
         {
-            if (Common.TryToLoadXML())
+            if (Common.TryToLoadXML(Common.fileName))
             {
-                XDocument doc = XDocument.Load(Common.fileName);
-                if (CheckAddLuggageForm())
+                try
                 {
-                    int maxId = doc.Root.Elements("Luggage").Max(t => Int32.Parse(t.Attribute("id").Value));
-                    XElement Luggage = new XElement("Luggage",
-                        new XAttribute("id", ++maxId),
-                        new XElement("Flight_number", textBox_FlightNumber.Text),
-                        new XElement("Date", textBox_Date.Text),
-                        new XElement("Time", textBox_Time.Text),
-                        new XElement("Destination", textBox_Destination.Text),
-                        new XElement("Last_name", textBox_LastName.Text),
-                        new XElement("NumberOfPlaces", textBox_NumberOfPlaces.Text),
-                        new XElement("Total_weight", textBox_TotalWeigh.Text)
-                        );
-                    doc.Root.Add(Luggage);
-                    doc.Save(Common.fileName);
-                    MessageBox.Show("Successfully!");
+                        XDocument doc = XDocument.Load(Common.fileName);
+                    if (CheckAddLuggageForm())
+                    {
+                        int maxId = doc.Root.Elements("Luggage").Max(t => Int32.Parse(t.Attribute("id").Value));
+                        XElement Luggage = new XElement("Luggage",
+                            new XAttribute("id", ++maxId),
+                            new XElement("Flight_number", textBox_FlightNumber.Text),
+                            new XElement("Date", textBox_Date.Text),
+                            new XElement("Time", textBox_Time.Text),
+                            new XElement("Destination", textBox_Destination.Text),
+                            new XElement("Last_name", textBox_LastName.Text),
+                            new XElement("NumberOfPlaces", textBox_NumberOfPlaces.Text),
+                            new XElement("Total_weight", textBox_TotalWeigh.Text)
+                            );
+                        doc.Root.Add(Luggage);
+                        doc.Save(Common.fileName);
+                        MessageBox.Show("Successfully!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при чтении файла xml: \r\n" + ex.Message);
                 }
             }
         }

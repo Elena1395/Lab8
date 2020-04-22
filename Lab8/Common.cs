@@ -5,11 +5,12 @@ using System.Xml.Linq;
 
 namespace Lab8
 {
-    class Common
+    public class Common
     {
         public static string fileName = "Luggage.xml";
+        public static bool BoolForUnitTest = false;
 
-        public static bool TryToLoadXML()
+        public static bool TryToLoadXML(string fileName)
         {
             try
             {
